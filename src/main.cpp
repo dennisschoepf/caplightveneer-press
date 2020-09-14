@@ -21,7 +21,7 @@ void setup()
   Serial.begin(9600);
   strip.begin();
   strip.show();
-  strip.setBrightness(150);
+  strip.setBrightness(200);
   pinMode(SENSOR_PIN, INPUT);
 }
 
