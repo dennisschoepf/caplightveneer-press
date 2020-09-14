@@ -47,36 +47,41 @@ void loop()
 
 void wave()
 {
-  lightLine(0, strip.Color(255, 0, 0));
-  delay(25);
-  lightLine(1, strip.Color(255, 0, 0));
-  delay(35);
-  lightLine(2, strip.Color(255, 0, 0));
-  delay(60);
-  lightLine(3, strip.Color(255, 0, 0));
-  delay(90);
-  lightLine(4, strip.Color(255, 0, 0));
-  delay(115);
-  lightLine(0, strip.Color(0, 0, 0));
-  lightLine(5, strip.Color(255, 0, 0));
-  delay(140);
-  lightLine(1, strip.Color(0, 0, 0));
-  delay(50);
-  lightLine(2, strip.Color(0, 0, 0));
-  delay(180);
-  lightLine(3, strip.Color(0, 0, 0));
-  delay(125);
-  lightLine(4, strip.Color(0, 0, 0));
-  lightLine(6, strip.Color(255, 0, 0));
-  delay(220);
-  lightLine(6, strip.Color(255, 0, 0));
-  lightLine(5, strip.Color(0, 0, 0));
-  delay(275);
-  lightLine(7, strip.Color(255, 0, 0));
-  delay(300);
-  lightLine(6, strip.Color(0, 0, 0));
-  delay(600);
-  lightLine(7, strip.Color(0, 0, 0));
+  for (int i = 0; i < LED_PER_LINE_COUNT; i++)
+  {
+    if (i <= LED_PER_LINE_COUNT / 2)
+    {
+      /* Turn on the first half of LED lines rather fast */
+      lightLine(i, strip.Color(255, 0, 0));
+      delay(25 + i * 15);
+    }
+    else if (i == LED_PER_LINE_COUNT / 2 + 1)
+    {
+      lightLine(0, strip.Color(0, 0, 0));
+      lightLine(5, strip.Color(255, 0, 0));
+      delay(125);
+
+      for (int j = 0; j < LED_PER_LINE_COUNT / 2 + 1; j++)
+      {
+        lightLine(j, strip.Color(0, 0, 0));
+        delay(50 + j * 25);
+      }
+    }
+    else if (i <= LED_PER_LINE_COUNT * 3 / 4)
+    {
+      lightLine(i, strip.Color(255, 0, 0));
+      lightLine(i - 1, strip.Color(0, 0, 0));
+      delay(150 + i * 10);
+    }
+    else if (i == LED_PER_LINE_COUNT - 1)
+    {
+      lightLine(i, strip.Color(255, 0, 0));
+      delay(150 + i * 25);
+      lightLine(i - 1, strip.Color(0, 0, 0));
+      delay(150 + i * 25);
+      lightLine(i, strip.Color(0, 0, 0));
+    }
+  }
 }
 
 void lightLine(int lineIndex, uint32_t color)
