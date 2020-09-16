@@ -54,6 +54,10 @@ void loop()
   }
 }
 
+void outwards()
+{
+}
+
 void wave()
 {
   /* Loop through all LED lines (1 LED per strip depending on the matrix setup) to create wave/ripple effect */
